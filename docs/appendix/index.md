@@ -13,7 +13,7 @@
 - [创建账户](../environments/ubuntu/user-permissions.md#一创建账户)
 - [sudo权限管理](../environments/ubuntu/user-permissions.md#二系统管理权限sudo)
 - [文件权限](../environments/ubuntu/user-permissions.md#三文件权限管理)
-- [ACL高级权限](../environments/ubuntu/user-permissions.md#四acl高级权限)
+- [ACL高级权限](../environments/ubuntu/user-permissions.md#五acl高级权限)
 
 ### 软件安装与管理
 - [APT包管理](../environments/ubuntu/software-management.md#一apt包管理器)

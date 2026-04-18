@@ -74,6 +74,9 @@ markdown_extensions:
   - toc:                         # 目录
       permalink: true
       toc_depth: 3
+      slugify: !!python/object/apply:pymdownx.slugs.slugify
+        kwds:
+          case: lower
 
 # 额外CSS/JS
 extra_css:
@@ -88,10 +91,6 @@ extra:
   social:
     - icon: fontawesome/brands/github
       link: https://github.com/your-org
-  
-  # 版本信息
-  version:
-    provider: mike
 
 # 导航结构（后续可根据需要自由增删）
 nav:
