@@ -1,6 +1,6 @@
 /**
  * 实验室知识库 - 自定义JavaScript
- * 功能：导航折叠、搜索触发、Esc关闭搜索
+ * 功能：导航折叠、侧栏收缩/展开、搜索框点击外部关闭
  */
 
 (function() {
@@ -8,7 +8,8 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         initNavToggle();
-        initSearchTrigger();
+        initSidebarToggle();
+        initSearchDismiss();
     });
 
     /**
@@ -63,27 +64,67 @@
     }
 
     /**
-     * 搜索触发：点击侧边栏搜索按钮打开Material搜索对话框，
-     * 并自动聚焦搜索输入框
+     * 侧栏收缩/展开功能
+     * 点击顶栏三横线按钮切换侧栏，状态持久化到localStorage
      */
-    function initSearchTrigger() {
+    function initSidebarToggle() {
+        var toggleBtn = document.getElementById('lab-sidebar-toggle');
+        if (!toggleBtn) return;
+
+        var isHidden = document.documentElement.classList.contains('sidebar-hidden');
+        toggleBtn.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+
+        toggleBtn.addEventListener('click', function() {
+            var nowHidden = document.documentElement.classList.toggle('sidebar-hidden');
+            toggleBtn.setAttribute('aria-expanded', nowHidden ? 'false' : 'true');
+            localStorage.setItem('lab-sidebar-hidden', nowHidden ? 'true' : 'false');
+        });
+    }
+
+    /**
+     * 搜索框交互增强
+     * 1. 聚焦搜索输入框时，自动勾选 #__search 以激活搜索结果面板
+     * 2. 点击搜索区域外部时，取消勾选以关闭搜索
+     */
+    function initSearchDismiss() {
         var searchToggle = document.getElementById('__search');
         if (!searchToggle) return;
 
-        // 当搜索对话框打开时，自动聚焦输入框
-        searchToggle.addEventListener('change', function() {
-            if (this.checked) {
-                var input = document.querySelector('.md-search__input');
-                if (input) {
-                    setTimeout(function() { input.focus(); }, 100);
+        var searchInput = document.querySelector('.md-search__input');
+        var searchContainer = document.querySelector('.md-search');
+
+        // 聚焦搜索输入框时激活搜索（勾选checkbox以显示结果面板）
+        if (searchInput) {
+            searchInput.addEventListener('focus', function() {
+                if (!searchToggle.checked) {
+                    searchToggle.checked = true;
+                    searchToggle.dispatchEvent(new Event('change'));
+                }
+            });
+        }
+
+        // 点击搜索区域外部时关闭搜索（使用mousedown更可靠）
+        document.addEventListener('mousedown', function(e) {
+            if (!searchToggle.checked) return;
+            if (searchContainer && !searchContainer.contains(e.target)) {
+                searchToggle.checked = false;
+                searchToggle.dispatchEvent(new Event('change'));
+                if (searchInput) {
+                    searchInput.value = '';
+                    searchInput.blur();
                 }
             }
         });
 
-        // Esc键关闭搜索
+        // Escape键关闭搜索
         document.addEventListener('keydown', function(e) {
             if (e.key === 'Escape' && searchToggle.checked) {
                 searchToggle.checked = false;
+                searchToggle.dispatchEvent(new Event('change'));
+                if (searchInput) {
+                    searchInput.value = '';
+                    searchInput.blur();
+                }
             }
         });
     }

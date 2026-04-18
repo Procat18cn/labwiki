@@ -1,6 +1,6 @@
 /**
  * 实验室知识库 - 自定义JavaScript
- * 功能：导航折叠、搜索触发、Esc关闭搜索
+ * 功能：导航折叠、侧栏收缩/展开、搜索框点击外部关闭
  */
 
 (function() {
@@ -8,7 +8,8 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         initNavToggle();
-        initSearchTrigger();
+        initSidebarToggle();
+        initSearchDismiss();
     });
 
     /**
@@ -63,26 +64,36 @@
     }
 
     /**
-     * 搜索触发：点击侧边栏搜索按钮打开Material搜索对话框，
-     * 并自动聚焦搜索输入框
+     * 侧栏收缩/展开功能
+     * 点击顶栏三横线按钮切换侧栏，状态持久化到localStorage
      */
-    function initSearchTrigger() {
+    function initSidebarToggle() {
+        var toggleBtn = document.getElementById('lab-sidebar-toggle');
+        if (!toggleBtn) return;
+
+        var isHidden = document.documentElement.classList.contains('sidebar-hidden');
+        toggleBtn.setAttribute('aria-expanded', isHidden ? 'false' : 'true');
+
+        toggleBtn.addEventListener('click', function() {
+            var nowHidden = document.documentElement.classList.toggle('sidebar-hidden');
+            toggleBtn.setAttribute('aria-expanded', nowHidden ? 'false' : 'true');
+            localStorage.setItem('lab-sidebar-hidden', nowHidden ? 'true' : 'false');
+        });
+    }
+
+    /**
+     * 点击搜索区域外部关闭搜索框
+     * Material主题通过 #__search checkbox 控制搜索显示状态
+     */
+    function initSearchDismiss() {
         var searchToggle = document.getElementById('__search');
         if (!searchToggle) return;
 
-        // 当搜索对话框打开时，自动聚焦输入框
-        searchToggle.addEventListener('change', function() {
-            if (this.checked) {
-                var input = document.querySelector('.md-search__input');
-                if (input) {
-                    setTimeout(function() { input.focus(); }, 100);
-                }
-            }
-        });
+        document.addEventListener('click', function(e) {
+            if (!searchToggle.checked) return;
 
-        // Esc键关闭搜索
-        document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && searchToggle.checked) {
+            var searchContainer = document.querySelector('.md-search');
+            if (searchContainer && !searchContainer.contains(e.target)) {
                 searchToggle.checked = false;
             }
         });

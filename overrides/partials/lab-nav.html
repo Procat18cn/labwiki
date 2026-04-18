@@ -11,7 +11,7 @@
   {% set is_active = nav_item.active %}
   {% set has_children = nav_item.children %}
 
-  <li class="lab-nav__item{% if is_active %} lab-nav__item--active{% endif %}{% if is_section %} lab-nav__item--section{% endif %}">
+  <li class="lab-nav__item{% if is_active %} lab-nav__item--active{% endif %}{% if is_section %} lab-nav__item--section{% endif %}" data-level="{{ level }}">
 
     {# 章节标题（可点击折叠） #}
     {% if is_section %}

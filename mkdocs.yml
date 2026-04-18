@@ -70,6 +70,11 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.tasklist:          # 任务列表
       custom_checkbox: true
+  - pymdownx.emoji:             # Material图标和emoji
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list                    # 属性列表 { .class }
+  - md_in_html                   # HTML块内Markdown渲染
   - tables                       # 表格
   - toc:                         # 目录
       permalink: true
@@ -77,6 +82,10 @@ markdown_extensions:
       slugify: !!python/object/apply:pymdownx.slugs.slugify
         kwds:
           case: lower
+
+# Hooks（自定义构建脚本）
+hooks:
+  - hooks/copy_sources.py       # 复制.md源文件供下载
 
 # 额外CSS/JS
 extra_css:
