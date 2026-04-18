@@ -1,0 +1,218 @@
+/*
+ * 实验室知识库 - 自定义样式
+ * 无顶栏布局，左侧边栏包含标题、搜索、导航
+ * 支持目录折叠，修复emoji显示
+ */
+
+/* ========== 基础变量 ========== */
+:root {
+  --lab-primary: #3f51b5;
+  --lab-primary-light: #5c6bc0;
+}
+
+/* ========== 隐藏顶栏 ========== */
+.md-header {
+  display: none !important;
+}
+
+.md-container {
+  padding-top: 0 !important;
+}
+
+/* ========== 知识库标题 ========== */
+.lab-title {
+  padding: 1.2rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+  background: var(--md-default-bg-color);
+}
+
+.lab-title__link {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--lab-primary);
+  text-decoration: none;
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.lab-title__link:hover {
+  color: var(--lab-primary-light);
+}
+
+.lab-title svg,
+.lab-title__link svg {
+  width: 1.8rem;
+  height: 1.8rem;
+  fill: currentColor;
+  flex-shrink: 0;
+}
+
+/* ========== 搜索框 ========== */
+.lab-search {
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--md-default-fg-color--lightest);
+}
+
+.lab-search .md-search__form {
+  border-radius: 4px;
+  background: var(--md-default-bg-color--light);
+}
+
+[data-md-color-scheme="slate"] .lab-search .md-search__form {
+  background: var(--md-default-bg-color--lighter);
+}
+
+/* 隐藏搜索overlay的头部 */
+.md-search__overlay {
+  top: 0 !important;
+}
+
+/* ========== 自定义导航（可折叠） ========== */
+.lab-nav {
+  padding: 0.5rem 0;
+  font-size: 0.85rem;
+}
+
+.lab-nav__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.lab-nav__list--nested {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.lab-nav__list--expanded {
+  max-height: 2000px;
+}
+
+.lab-nav__item {
+  position: relative;
+}
+
+.lab-nav__item--active > .lab-nav__link,
+.lab-nav__item--active > .lab-nav__section-title .lab-nav__link {
+  color: var(--lab-primary);
+  background: rgba(63, 81, 181, 0.08);
+}
+
+/* 章节标题（可折叠） */
+.lab-nav__section-title {
+  display: flex;
+  align-items: center;
+  position: relative;
+}
+
+.lab-nav__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.5rem;
+  height: 1.5rem;
+  padding: 0;
+  margin: 0 0.2rem 0 0.5rem;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.lab-nav__icon {
+  fill: var(--md-default-fg-color--light);
+  transition: transform 0.2s;
+}
+
+.lab-nav__item--expanded .lab-nav__icon,
+.lab-nav__section-title[aria-expanded="true"] .lab-nav__icon {
+  transform: rotate(90deg);
+}
+
+/* 导航链接 */
+.lab-nav__link {
+  display: block;
+  padding: 0.5rem 1rem;
+  color: var(--md-default-fg-color);
+  text-decoration: none;
+  transition: background 0.2s;
+  flex: 1;
+}
+
+.lab-nav__link:hover {
+  background: var(--md-default-bg-color--light);
+}
+
+.lab-nav__link--active {
+  color: var(--lab-primary);
+  font-weight: 500;
+}
+
+/* 嵌套层级缩进 */
+.lab-nav__list--nested .lab-nav__link {
+  padding-left: 2.5rem;
+}
+
+.lab-nav__list--nested .lab-nav__list--nested .lab-nav__link {
+  padding-left: 4rem;
+}
+
+/* ========== 左侧边栏调整 ========== */
+.md-sidebar--primary .md-sidebar__inner {
+  padding-top: 0;
+}
+
+/* 隐藏默认导航 */
+.md-nav--primary,
+.md-nav__title {
+  display: none !important;
+}
+
+/* ========== 主内容区 ========== */
+.md-content {
+  padding-top: 1rem;
+}
+
+.md-content__inner {
+  padding-top: 0.5rem;
+}
+
+/* ========== Emoji支持（关键修复） ========== */
+.lab-nav,
+.lab-nav__link,
+.md-content,
+.md-typeset {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+               "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji",
+               "Segoe UI Symbol", "Noto Color Emoji", sans-serif !important;
+}
+
+/* 确保emoji正常显示 */
+.lab-nav__link,
+.md-typeset {
+  line-height: 1.6;
+}
+
+/* ========== 打印样式 ========== */
+@media print {
+  .md-sidebar {
+    display: none !important;
+  }
+
+  .md-content {
+    margin-left: 0 !important;
+  }
+}
+
+/* ========== 响应式调整 ========== */
+@media screen and (max-width: 76.1875em) {
+  .lab-title {
+    padding: 1rem;
+  }
+
+  .lab-title__text {
+    font-size: 1rem;
+  }
+}

@@ -1,0 +1,61 @@
+{#
+  实验室知识库 - 自定义可折叠导航
+  支持多级目录折叠展开
+#}
+
+{% import "partials/nav-item.html" as item %}
+
+{# 递归渲染导航项 - 必须先定义后使用 #}
+{% macro render_nav_item(nav_item, level) %}
+  {% set is_section = nav_item.is_section %}
+  {% set is_active = nav_item.active %}
+  {% set has_children = nav_item.children %}
+
+  <li class="lab-nav__item{% if is_active %} lab-nav__item--active{% endif %}{% if is_section %} lab-nav__item--section{% endif %}">
+
+    {# 章节标题（可点击折叠） #}
+    {% if is_section %}
+      <div class="lab-nav__section-title" data-md-component="lab-nav-section">
+        <button class="lab-nav__toggle" aria-label="{{ lang.t('nav.toggle') }}">
+          <svg class="lab-nav__icon" viewBox="0 0 24 24" width="16" height="16">
+            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+          </svg>
+        </button>
+        {% if nav_item.children | length > 0 and nav_item.children[0].url %}
+          <a href="{{ nav_item.children[0].url | url }}" class="lab-nav__link">
+            {{ nav_item.title }}
+          </a>
+        {% else %}
+          <span class="lab-nav__link">{{ nav_item.title }}</span>
+        {% endif %}
+      </div>
+
+      {# 子导航 #}
+      {% if nav_item.children %}
+        <ul class="lab-nav__list lab-nav__list--nested{% if is_active %} lab-nav__list--expanded{% endif %}">
+          {% for child in nav_item.children %}
+            {% if not child.meta or not child.meta.hide %}
+              {{ render_nav_item(child, level + 1) }}
+            {% endif %}
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+    {# 普通页面链接 #}
+    {% else %}
+      <a href="{{ nav_item.url | url }}" class="lab-nav__link{% if nav_item == page %} lab-nav__link--active{% endif %}">
+        {{ nav_item.title }}
+      </a>
+    {% endif %}
+
+  </li>
+{% endmacro %}
+
+<!-- 导航列表 -->
+<ul class="lab-nav__list" data-md-component="lab-nav">
+  {% for nav_item in nav %}
+    {% if not nav_item.meta or not nav_item.meta.hide %}
+      {{ render_nav_item(nav_item, 0) }}
+    {% endif %}
+  {% endfor %}
+</ul>

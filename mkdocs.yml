@@ -1,0 +1,137 @@
+# 实验室知识库 MkDocs 配置文件
+# 使用 Material 主题，自定义为无顶栏布局
+
+site_name: 实验室知识库
+site_description: 实验室综合技术知识库，涵盖系统配置、软件开发、AI深度学习、实验技能等
+site_author: 实验室团队
+
+# 仓库设置（后续可配置为GitHub仓库）
+# repo_url: https://github.com/your-org/lab-knowledge-base
+# repo_name: GitHub
+
+# 主题配置
+theme:
+  name: material
+  
+  # 自定义目录
+  custom_dir: overrides
+  
+  # 颜色方案
+  palette:
+    - scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: 切换到深色模式
+    - scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: 切换到浅色模式
+  
+  # 字体
+  font:
+    text: Roboto
+    code: Roboto Mono
+  
+  # 图标
+  icon:
+    logo: material/book-open-variant
+  
+  # 功能特性
+  features:
+    - navigation.expand          # 默认展开导航
+    - navigation.path            # 显示当前路径
+    - navigation.indexes         # 允许章节索引页
+    - search.suggest             # 搜索建议
+    - search.highlight           # 高亮搜索结果
+    - content.code.copy          # 代码块复制按钮
+    - content.action.edit        # 编辑按钮（需配置repo_url）
+    - content.action.view        # 查看源码按钮
+
+# 插件
+plugins:
+  - search:
+      lang: zh                    # 中文搜索支持
+  - minify:
+      minify_html: true
+
+# 扩展
+markdown_extensions:
+  - admonition                   # 提示框
+  - pymdownx.details             # 折叠详情
+  - pymdownx.superfences         # 代码块
+  - pymdownx.highlight:         # 代码高亮
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed:            # 标签页
+      alternate_style: true
+  - pymdownx.tasklist:          # 任务列表
+      custom_checkbox: true
+  - tables                       # 表格
+  - toc:                         # 目录
+      permalink: true
+      toc_depth: 3
+
+# 额外CSS/JS
+extra_css:
+  - extra.css
+
+extra_javascript:
+  - extra.js
+
+copyright: Copyright &copy; 2026 实验室团队
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/your-org
+  
+  # 版本信息
+  version:
+    provider: mike
+
+# 导航结构（后续可根据需要自由增删）
+nav:
+  - 首页: index.md
+  
+  - 实验环境与系统:
+    - 概述: environments/index.md
+    - Ubuntu系统:
+      - 系统基础与配置: environments/ubuntu/system-basics.md
+      - 用户与权限管理: environments/ubuntu/user-permissions.md
+      - 软件安装与管理: environments/ubuntu/software-management.md
+      - 文件系统与存储: environments/ubuntu/filesystem-storage.md
+    - Windows系统:
+      - 系统配置: environments/windows/system-config.md
+      - 软件环境: environments/windows/software-env.md
+  
+  - 软件开发与工具:
+    - 概述: development/index.md
+    - 版本控制: development/version-control.md
+    - 开发环境: development/dev-environment.md
+    - 编程技巧: development/coding-tips.md
+  
+  - AI与深度学习:
+    - 概述: ai-deep-learning/index.md
+    - 环境搭建: ai-deep-learning/environment-setup.md
+    - 模型训练: ai-deep-learning/model-training.md
+    - 应用实践: ai-deep-learning/applications.md
+  
+  - 实验技能与方法:
+    - 概述: lab-skills/index.md
+    - 实验操作: lab-skills/operations.md
+    - 数据分析: lab-skills/data-analysis.md
+    - 测试方法: lab-skills/testing-methods.md
+  
+  - 实验系统与硬件:
+    - 概述: hardware/index.md
+    - 硬件搭建: hardware/setup.md
+    - 设备配置: hardware/device-config.md
+    - 仪器使用: hardware/instruments.md
+  
+  - 附录:
+    - 常用命令速查表: appendix/command-cheatsheet.md
+    - 索引: appendix/index.md

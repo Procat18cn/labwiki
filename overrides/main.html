@@ -1,0 +1,77 @@
+{#
+  实验室知识库 - Material主题自定义模板
+  功能：移除顶栏，将标题和搜索整合到左侧边栏
+  修复：避免边栏重复，添加目录折叠
+#}
+
+{% extends "base.html" %}
+
+{# 移除顶栏头部 #}
+{% block header %}{% endblock %}
+
+{# 覆盖site_nav块，自定义左侧边栏 #}
+{% block site_nav %}
+  {% if nav %}
+    {% if page.meta and page.meta.hide %}
+      {% set hidden = "hidden" if "navigation" in page.meta.hide %}
+    {% endif %}
+    <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" {{ hidden }}>
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+
+          {# 知识库标题区域 #}
+          <div class="lab-title">
+            <a href="{{ nav.homepage.url | url }}" title="{{ config.site_name | e }}" class="lab-title__link">
+              {% if config.theme.icon.logo %}
+                {% include "partials/logo.html" %}
+              {% endif %}
+              <span class="lab-title__text">{{ config.site_name }}</span>
+            </a>
+          </div>
+
+          {# 搜索框 #}
+          {% if "search" in config.plugins %}
+            <div class="lab-search">
+              {% include "partials/search.html" %}
+            </div>
+          {% endif %}
+
+          {# 导航树 - 使用自定义折叠导航 #}
+          <nav class="lab-nav" aria-label="{{ lang.t('nav.title') }}">
+            {% include "partials/lab-nav.html" %}
+          </nav>
+
+        </div>
+      </div>
+    </div>
+  {% endif %}
+
+  {# 右侧目录栏（文章内目录） #}
+  {% if page.toc %}
+    <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+      <div class="md-sidebar__scrollwrap">
+        <div class="md-sidebar__inner">
+          {% include "partials/toc.html" %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+{% endblock %}
+
+{# 覆盖container块，避免重复调用site_nav #}
+{% block container %}
+  <div class="md-container" data-md-component="container">
+    <main class="md-main" data-md-component="main">
+      <div class="md-main__inner md-grid">
+        {# 这里不再调用self.site_nav()，因为已经在上面定义了 #}
+        {{ super() }}
+      </div>
+    </main>
+    {% include "partials/footer.html" %}
+  </div>
+{% endblock %}
+
+{# 覆盖content块，保持默认行为 #}
+{% block content %}
+  {% include "partials/content.html" %}
+{% endblock %}
