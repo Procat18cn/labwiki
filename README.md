@@ -1,6 +1,8 @@
 # 实验室知识库
 
-实验室综合技术知识库，采用 MkDocs + Material 主题构建，涵盖系统配置、软件开发、AI深度学习、实验技能等领域的技术文档。
+[Repository](https://github.com/Procat18cn/labwiki) \ [Page](https://procat18cn.github.io/labwiki/)
+
+实验室综合技术知识库，采用 MkDocs + Material 主题构建，涵盖系统配置、软件开发、AI深度学习、实验技能等领域的实用技术文档。
 
 ---
 
