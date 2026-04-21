@@ -91,7 +91,7 @@
         if (!searchToggle) return;
 
         var searchInput = document.querySelector('.md-search__input');
-        var searchContainer = document.querySelector('.md-search');
+        var searchInner = document.querySelector('.md-search__inner');
 
         // 聚焦搜索输入框时激活搜索（勾选checkbox以显示结果面板）
         if (searchInput) {
@@ -106,7 +106,7 @@
         // 点击搜索区域外部时关闭搜索（使用mousedown更可靠）
         document.addEventListener('mousedown', function(e) {
             if (!searchToggle.checked) return;
-            if (searchContainer && !searchContainer.contains(e.target)) {
+            if (searchInner && !searchInner.contains(e.target)) {
                 searchToggle.checked = false;
                 searchToggle.dispatchEvent(new Event('change'));
                 if (searchInput) {

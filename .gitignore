@@ -1,2 +1,5 @@
 ﻿site/
 nul
+
+# Python
+__pycache__/
