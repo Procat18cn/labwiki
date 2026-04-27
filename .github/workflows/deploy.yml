@@ -29,7 +29,12 @@ jobs:
             ${{ runner.os }}-pip-
 
       - name: 安装依赖
-        run: pip install mkdocs-material mkdocs-minify-plugin
+        run: |
+          pip install \
+            mkdocs==1.6.1 \
+            mkdocs-material==9.7.6 \
+            mkdocs-minify-plugin==0.8.0 \
+            pymdown-extensions==10.21.2
 
       - name: 构建并部署
         run: mkdocs gh-deploy --force

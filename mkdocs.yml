@@ -119,7 +119,9 @@ nav:
   - 软件开发与工具:
     - 概述: development/index.md
     - 版本控制: development/version-control.md
-    - 开发环境: development/dev-environment.md
+    # - 开发环境: development/dev-environment.md
+    - 开发环境:
+      - 修改Cursor插件市场: development/dev-environment/修改Cursor插件市场.md
     - 编程技巧: development/coding-tips.md
   
   - AI与深度学习:

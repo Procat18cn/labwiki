@@ -14,7 +14,7 @@
 | **部署平台** | GitHub Pages |
 | **自动化** | GitHub Actions 自动构建部署 |
 | **环境管理** | Conda (`mydocs` 环境) |
-| **当前版本** | 2026-04-21 (v1) |
+| **当前版本** | 2026-04-28 (v1) |
 
 ---
 
@@ -53,6 +53,11 @@ labwiki/
 │   │   │   └── filesystem-storage.md
 │   │   └── windows/               # Windows相关文档
 │   ├── development/               # 软件开发与工具
+│   │   ├── index.md
+│   │   ├── coding-tips.md
+│   │   ├── version-control.md
+│   │   └── dev-environment/      # 开发环境专题
+│   │       └── 修改Cursor插件市场.md
 │   ├── ai-deep-learning/          # AI与深度学习
 │   ├── lab-skills/                # 实验技能与方法
 │   ├── hardware/                  # 实验系统与硬件
@@ -167,6 +172,8 @@ mkdocs gh-deploy
 
 | 日期 | 主要更新 |
 |------|----------|
+| 2026-04-28 (v1) | 实施改进方案1：统一 GitHub Actions 与本地 `mydocs` 环境依赖版本，固定安装 `mkdocs`、`mkdocs-material`、`mkdocs-minify-plugin`、`pymdown-extensions`，提升构建可复现性 |
+| 2026-04-21 (v2) | 新增“实际改进方案清单”，补充风险说明、优先级和后续治理建议，便于版本对照和档案管理 |
 | 2026-04-21 (v1) | 修复搜索框激活后点击页面空白/无关位置无法退出的问题，优化搜索框关闭交互 |
 | 2026-04-18 (v5) | 修复搜索框居中、调色板按钮可见性、点击外部关闭搜索 |
 | 2026-04-18 (v4) | 合并双搜索框、添加调色板切换、添加文档下载功能 |

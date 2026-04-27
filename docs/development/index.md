@@ -12,7 +12,8 @@
 - 代码仓库管理
 
 ### 开发环境
-- IDE配置（VSCode、PyCharm等）
+- IDE配置（VSCode、Cursor等）
+    - [Cursor 插件市场修改](dev-environment/修改Cursor插件市场.md) - 令Cursor使用VSCode的插件市场
 - 编译器安装与配置
 - 虚拟环境管理
 
