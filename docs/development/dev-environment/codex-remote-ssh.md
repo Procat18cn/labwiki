@@ -105,6 +105,10 @@ remote_connections = true
 
 保存后重启 Codex App。正常情况下，可以在设置中看到 `Settings > Connections` 或类似的“连接”配置项。
 
+![Codex App Connections 设置页面](assets/codex-remote-ssh-connections.webp){ loading=lazy }
+
+*图 1：启用 `remote_connections` 后，Codex App 设置中的 Connections 页面会显示可用的 SSH 连接。*
+
 如果没有看到入口，按以下顺序检查：
 
 1. 确认 Codex App 已更新到较新版本。
