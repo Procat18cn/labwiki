@@ -74,6 +74,21 @@
 - 维护类文件如果不打算公开，应优先放在仓库根目录或其他非 `docs/` 目录。
 - 如果必须在公开文档中展示敏感配置示例，应使用占位符，例如 `<YOUR_API_KEY>`、`<SERVER_HOST>`、`<USERNAME>`。
 
+## 草稿与知识整理 Skill
+
+当用户要求把零散技术材料、聊天记录、网页、PDF、笔记或故障排查过程整理为知识库文章时，优先使用 `organize-tech-knowledge-doc` skill。该 skill 的来源仓库为 `https://github.com/Procat18cn/skills`，路径为 `skills/organize-tech-knowledge-doc`。
+
+使用该 skill 生成的初稿默认先放入根目录 `drafts/`，不要直接写入 `docs/`。进入 `docs/` 前必须完成事实核查、公开性审查、格式整理和导航同步。
+
+`drafts/` 不是私密区：如果仓库是公开仓库，提交到 `drafts/` 的内容同样可以被外部看到。敏感原始材料、内部配置、未经清理的聊天记录、密钥、内网地址和个人信息不得提交到仓库。
+
+草稿转为正式知识文章前，应确保：
+
+- 文章结构符合本库规范：标题、摘要、关键词、结构化正文、参考文档和更新日期。
+- 外部资料来源真实、可信，优先使用官方文档或可靠社区资料，不编造链接。
+- 系统级操作包含风险说明、验证方法和回滚步骤。
+- 目标页面移动到 `docs/` 后，同步更新 `mkdocs.yml`、首页入口、分类索引和必要的附录索引。
+
 ## 前端定制规范
 
 前端自定义主要集中在 `overrides/main.html`、`overrides/extra.css` 和 `overrides/extra.js`。修改这些文件时，要保持现有核心交互：
@@ -88,7 +103,9 @@
 
 ## 构建与验证
 
-本地开发、调试、预览和构建验证推荐使用 Conda 环境 `mydocs`。该环境由 `environment.yml` 管理，用于在本机复现 MkDocs 及主题插件版本。
+本地执行 MkDocs 相关命令时，应优先使用 Conda 环境 `mydocs`。该环境由 `environment.yml` 管理，用于在本机复现 MkDocs 及主题插件版本。
+
+纯文本编辑或只读检查不强制激活 `mydocs`；但运行 `mkdocs serve`、`mkdocs build`、验证主题样式、搜索、导航、下载按钮或插件行为时，应先执行 `conda activate mydocs`。
 
 GitHub Pages 自动部署不依赖本地 Conda 环境。线上部署由 `.github/workflows/deploy.yml` 在 GitHub Actions runner 中配置 Python 3.11，并通过 `pip` 安装固定版本依赖后执行部署。
 
@@ -100,11 +117,13 @@ GitHub Pages 自动部署不依赖本地 Conda 环境。线上部署由 `.github
 conda activate mydocs
 mkdocs serve
 mkdocs build --strict
+conda env create -f environment.yml
+conda env update -f environment.yml --prune
 ```
 
 修改文档内容后，至少检查页面渲染、导航位置、内部链接和搜索结果。修改 `mkdocs.yml`、`hooks/`、`overrides/` 或部署配置后，应运行 `mkdocs build --strict`；涉及界面交互时，还应本地预览并手动检查搜索、侧栏折叠、深浅色切换、下载按钮和移动端布局。
 
-如果当前 shell 中无法直接调用 `mkdocs`，先确认是否已激活 `mydocs` 环境，不要因为未激活环境就修改依赖版本或部署流程。
+如果 `mydocs` 不存在、`mkdocs` 不可用，或实际依赖版本与 `environment.yml` 不一致，应停止相关 MkDocs 验证并向用户反馈，建议其创建、更新或修复环境。不要因为本地环境未激活或异常就随意修改依赖版本、部署流程，或改用未确认版本完成验证。若最终无法完成构建验证，应在回复中明确说明原因。
 
 ## 安全规范
 
