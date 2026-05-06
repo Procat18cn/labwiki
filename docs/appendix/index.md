@@ -21,6 +21,11 @@
 - [源码编译](../environments/ubuntu/software-management.md#三源码编译安装)
 - [Anaconda安装](../environments/ubuntu/software-management.md#五anaconda环境管理)
 
+### 软件开发与工具
+- [Codex 远程连接 SSH](../development/dev-environment/codex-remote-ssh.md)
+- [Codex 自定义模型服务配置](../development/dev-environment/codex-remote-ssh.md#七第三方-api-或自定义模型服务配置)
+- [Codex 远程连接常见问题排查](../development/dev-environment/codex-remote-ssh.md#八常见问题排查)
+
 ### 文件系统与存储
 - [NAS挂载](../environments/ubuntu/filesystem-storage.md#一nas共享文件夹挂载)
 - [Windows读取Linux硬盘](../environments/ubuntu/filesystem-storage.md#二跨系统文件访问)
@@ -36,6 +41,7 @@
 | `apt` | [软件安装与管理](../environments/ubuntu/software-management.md) |
 | `chmod` | [用户与权限管理](../environments/ubuntu/user-permissions.md) |
 | `chown` | [用户与权限管理](../environments/ubuntu/user-permissions.md) |
+| `Codex` | [Codex 远程连接 SSH](../development/dev-environment/codex-remote-ssh.md) |
 | `conda` | [软件安装与管理](../environments/ubuntu/software-management.md) |
 | `fstab` | [文件系统与存储](../environments/ubuntu/filesystem-storage.md) |
 | `lscpu` | [系统基础与配置](../environments/ubuntu/system-basics.md) |
@@ -44,6 +50,7 @@
 | `NAS` | [文件系统与存储](../environments/ubuntu/filesystem-storage.md) |
 | `nvidia-smi` | [系统基础与配置](../environments/ubuntu/system-basics.md) |
 | `sudo` | [用户与权限管理](../environments/ubuntu/user-permissions.md) |
+| `SSH` | [Codex 远程连接 SSH](../development/dev-environment/codex-remote-ssh.md) |
 | `tar.gz` | [软件安装与管理](../environments/ubuntu/software-management.md) |
 | `useradd` | [用户与权限管理](../environments/ubuntu/user-permissions.md) |
 
@@ -59,6 +66,7 @@
 | 想让别人安装软件但不给sudo | [用户与权限管理 - 临时授权](../environments/ubuntu/user-permissions.md#六临时授权与软件安装) |
 | 安装GitHub Desktop | [软件安装与管理](../environments/ubuntu/software-management.md) |
 | 安装Anaconda | [软件安装与管理 - Anaconda](../environments/ubuntu/software-management.md#五anaconda环境管理) |
+| 使用 Codex App 连接远程服务器开发 | [Codex 远程连接 SSH](../development/dev-environment/codex-remote-ssh.md) |
 | 挂载NAS共享文件夹 | [文件系统与存储](../environments/ubuntu/filesystem-storage.md) |
 | Windows读取Linux硬盘 | [文件系统与存储 - 跨系统访问](../environments/ubuntu/filesystem-storage.md#二跨系统文件访问) |
 
@@ -70,4 +78,4 @@
 
 ---
 
-*最后更新：2026-04-17*
+*最后更新：2026-05-06*

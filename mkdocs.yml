@@ -122,6 +122,7 @@ nav:
     # - 开发环境: development/dev-environment.md
     - 开发环境:
       - 修改Cursor插件市场: development/dev-environment/修改Cursor插件市场.md
+      - Codex远程连接SSH: development/dev-environment/codex-remote-ssh.md
     - 编程技巧: development/coding-tips.md
   
   - AI与深度学习:

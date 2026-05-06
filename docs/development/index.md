@@ -14,6 +14,7 @@
 ### 开发环境
 - IDE配置（VSCode、Cursor等）
     - [Cursor 插件市场修改](dev-environment/修改Cursor插件市场.md) - 令Cursor使用VSCode的插件市场
+    - [Codex 远程连接 SSH 使用教程](dev-environment/codex-remote-ssh.md) - 使用 Codex App 连接远程 SSH 主机进行开发
 - 编译器安装与配置
 - 虚拟环境管理
 
