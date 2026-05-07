@@ -86,7 +86,7 @@ mkdocs serve
 # 浏览器访问 http://127.0.0.1:8000
 ```
 
-`mkdocs serve` 会实时监听文件变化并自动刷新页面，适合边编辑边预览。
+`mkdocs serve` 会实时监听文件变化并自动刷新页面，适合边编辑边预览。若修改 `extra.css`、`extra.js`、`mkdocs.yml` 或 `overrides/` 后浏览器仍显示旧样式/旧结构，请重启 `mkdocs serve`，并在浏览器中使用 `Ctrl+Shift+R` 强制刷新页面。
 
 ### 2.5 构建静态文件
 

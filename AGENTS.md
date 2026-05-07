@@ -123,6 +123,8 @@ conda env update -f environment.yml --prune
 
 修改文档内容后，至少检查页面渲染、导航位置、内部链接和搜索结果。修改 `mkdocs.yml`、`hooks/`、`overrides/` 或部署配置后，应运行 `mkdocs build --strict`；涉及界面交互时，还应本地预览并手动检查搜索、侧栏折叠、深浅色切换、下载按钮和移动端布局。
 
+本地预览时，`mkdocs serve` 对普通 Markdown 内容通常能自动刷新；但修改 `extra.css`、`extra.js`、`mkdocs.yml`、`overrides/` 或主题相关文件后，服务端或浏览器可能仍使用旧资源。若预览效果与源码不一致，应重启 `mkdocs serve`，并在浏览器中使用 `Ctrl+Shift+R` 强制刷新后再判断效果。
+
 如果 `mydocs` 不存在、`mkdocs` 不可用，或实际依赖版本与 `environment.yml` 不一致，应停止相关 MkDocs 验证并向用户反馈，建议其创建、更新或修复环境。不要因为本地环境未激活或异常就随意修改依赖版本、部署流程，或改用未确认版本完成验证。若最终无法完成构建验证，应在回复中明确说明原因。
 
 ## 安全规范

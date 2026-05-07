@@ -109,6 +109,8 @@ mkdocs serve
 # 浏览器访问 http://127.0.0.1:8000
 ```
 
+> 提示：Markdown 内容修改通常会自动刷新；若修改 `extra.css`、`extra.js`、`mkdocs.yml` 或 `overrides/` 后浏览器仍显示旧样式/旧结构，请重启 `mkdocs serve` 并使用 `Ctrl+Shift+R` 强制刷新页面。
+
 ### 构建站点
 
 ```bash

@@ -16,6 +16,7 @@
 }
 
 .md-main__inner {
+  margin-top: 0.2rem;
   padding: 0 0.6rem;
 }
 
@@ -224,6 +225,7 @@
   position: sticky;
   top: var(--lab-header-height);
   height: calc(100vh - var(--lab-header-height));
+  border-right: 1px solid var(--md-default-fg-color--lightest);
   transition: transform 0.3s ease, opacity 0.25s ease;
 }
 
@@ -269,7 +271,7 @@
 
 /* ========== 知识库标题 ========== */
 .lab-title {
-  padding: 1rem 1.2rem;
+  padding: 0.15rem 1.2rem 0.85rem;
   border-bottom: 1px solid var(--md-default-fg-color--lightest);
   background: var(--md-default-bg-color);
 }
@@ -298,6 +300,9 @@
 
 /* ========== 自定义导航（可折叠） ========== */
 .lab-nav {
+  --lab-nav-indent: 0.9rem;
+  --lab-nav-toggle-space: 0.95rem;
+  --lab-nav-link-x: 0.2rem;
   padding: 0.5rem 0;
   flex: 1;
   overflow-y: auto;
@@ -314,7 +319,7 @@
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.3s ease;
-  padding-left: 0.75rem;
+  padding-left: 0;
 }
 
 .lab-nav__list--expanded {
@@ -332,14 +337,29 @@
   position: relative;
 }
 
+.lab-nav__item[data-level="1"] > .lab-nav__section-title,
+.lab-nav__item[data-level="1"] > .lab-nav__link {
+  margin-left: var(--lab-nav-indent);
+}
+
+.lab-nav__item[data-level="2"] > .lab-nav__section-title,
+.lab-nav__item[data-level="2"] > .lab-nav__link {
+  margin-left: calc(var(--lab-nav-indent) * 2);
+}
+
+.lab-nav__item[data-level="3"] > .lab-nav__section-title,
+.lab-nav__item[data-level="3"] > .lab-nav__link {
+  margin-left: calc(var(--lab-nav-indent) * 3);
+}
+
 .lab-nav__toggle {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 1.4rem;
+  width: var(--lab-nav-toggle-space);
   height: 1.4rem;
   padding: 0;
-  margin: 0 0.15rem 0 0.3rem;
+  margin: 0;
   border: none;
   background: transparent;
   cursor: pointer;
@@ -350,21 +370,21 @@
 .lab-nav__icon {
   fill: var(--md-default-fg-color--light);
   transition: transform 0.2s, opacity 0.2s;
-  width: 16px;
-  height: 16px;
+  width: 14px;
+  height: 14px;
 }
 
 /* 二级箭头：更小、更淡 */
 .lab-nav__list--nested .lab-nav__icon {
-  width: 14px;
-  height: 14px;
+  width: 12px;
+  height: 12px;
   opacity: 0.7;
 }
 
 /* 三级箭头：最小、最淡 */
 .lab-nav__list--nested .lab-nav__list--nested .lab-nav__icon {
-  width: 12px;
-  height: 12px;
+  width: 11px;
+  height: 11px;
   opacity: 0.5;
 }
 
@@ -376,7 +396,7 @@
 /* === 导航链接 - 统一基础样式 === */
 .lab-nav__link {
   display: block;
-  padding: 0.4rem 0.75rem;
+  padding: 0.4rem 0.2rem;
   text-decoration: none;
   transition: background 0.2s, color 0.2s, border-color 0.2s;
   flex: 1;
@@ -384,6 +404,10 @@
   font-weight: 500;
   color: rgba(0, 0, 0, 0.78);
   border-left: 3px solid transparent;
+}
+
+.lab-nav__item:not(.lab-nav__item--section) > .lab-nav__link {
+  padding-left: calc(var(--lab-nav-toggle-space) + var(--lab-nav-link-x));
 }
 
 .lab-nav__link:hover {
@@ -395,13 +419,12 @@
 .lab-nav__item--active > .lab-nav__link,
 .lab-nav__item--active > .lab-nav__section-title .lab-nav__link {
   color: var(--lab-primary);
-  background: rgba(63, 81, 181, 0.08);
-  border-left-color: var(--lab-primary);
   font-weight: 600;
 }
 
 .lab-nav__link--active {
   color: var(--lab-primary);
+  background: rgba(63, 81, 181, 0.08);
   font-weight: 600;
   border-left-color: var(--lab-primary);
 }
@@ -422,15 +445,14 @@
 .lab-nav__list--nested .lab-nav__item--active > .lab-nav__link,
 .lab-nav__list--nested .lab-nav__item--active > .lab-nav__section-title .lab-nav__link {
   color: var(--lab-primary);
-  background: rgba(63, 81, 181, 0.06);
-  border-left-color: rgba(63, 81, 181, 0.5);
   font-weight: 500;
 }
 
 .lab-nav__list--nested .lab-nav__link--active {
   color: var(--lab-primary);
+  background: rgba(63, 81, 181, 0.08);
   font-weight: 500;
-  border-left-color: rgba(63, 81, 181, 0.5);
+  border-left-color: var(--lab-primary);
 }
 
 /* === 三级链接样式 === */
@@ -448,12 +470,12 @@
 
 .lab-nav__list--nested .lab-nav__list--nested .lab-nav__item--active > .lab-nav__link {
   color: rgba(63, 81, 181, 0.85);
-  border-left-color: rgba(63, 81, 181, 0.3);
 }
 
 .lab-nav__list--nested .lab-nav__list--nested .lab-nav__link--active {
   color: rgba(63, 81, 181, 0.85);
-  border-left-color: rgba(63, 81, 181, 0.3);
+  background: rgba(63, 81, 181, 0.08);
+  border-left-color: var(--lab-primary);
 }
 
 /* === 深色模式 - 顶栏 === */
@@ -491,7 +513,10 @@
 }
 
 [data-md-color-scheme="slate"] .lab-nav__item--active > .lab-nav__link,
-[data-md-color-scheme="slate"] .lab-nav__item--active > .lab-nav__section-title .lab-nav__link,
+[data-md-color-scheme="slate"] .lab-nav__item--active > .lab-nav__section-title .lab-nav__link {
+  color: #82b1ff;
+}
+
 [data-md-color-scheme="slate"] .lab-nav__link--active {
   color: #82b1ff;
   background: rgba(130, 177, 255, 0.1);
@@ -508,9 +533,14 @@
 }
 
 [data-md-color-scheme="slate"] .lab-nav__list--nested .lab-nav__item--active > .lab-nav__link,
+[data-md-color-scheme="slate"] .lab-nav__list--nested .lab-nav__item--active > .lab-nav__section-title .lab-nav__link {
+  color: rgba(130, 177, 255, 0.85);
+}
+
 [data-md-color-scheme="slate"] .lab-nav__list--nested .lab-nav__link--active {
   color: rgba(130, 177, 255, 0.85);
-  border-left-color: rgba(130, 177, 255, 0.4);
+  background: rgba(130, 177, 255, 0.1);
+  border-left-color: #82b1ff;
 }
 
 [data-md-color-scheme="slate"] .lab-nav__list--nested .lab-nav__list--nested .lab-nav__link {
@@ -524,16 +554,20 @@
 [data-md-color-scheme="slate"] .lab-nav__list--nested .lab-nav__list--nested .lab-nav__item--active > .lab-nav__link,
 [data-md-color-scheme="slate"] .lab-nav__list--nested .lab-nav__list--nested .lab-nav__link--active {
   color: rgba(130, 177, 255, 0.75);
-  border-left-color: rgba(130, 177, 255, 0.25);
+}
+
+[data-md-color-scheme="slate"] .lab-nav__list--nested .lab-nav__list--nested .lab-nav__link--active {
+  background: rgba(130, 177, 255, 0.1);
+  border-left-color: #82b1ff;
 }
 
 /* ========== 主内容区 ========== */
 .md-content {
-  padding-top: 1rem;
+  padding-top: 0.25rem;
 }
 
 .md-content__inner {
-  padding-top: 0.5rem;
+  padding-top: 0.15rem;
 }
 
 /* ========== Emoji支持 ========== */
